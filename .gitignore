@@ -1,0 +1,27 @@
+﻿################################################################################
+# Ten plik .gitignore został utworzony automatycznie przez Microsoft(R) Visual Studio.
+################################################################################
+
+/MVVMFirma/Models/Entities/DostawcyProduktow.cs
+/MVVMFirma/Models/Entities/Dostawy.cs
+/MVVMFirma/Models/Entities/Faktury.cs
+/MVVMFirma/Models/Entities/HurtowniaModel.Context.cs
+/MVVMFirma/Models/Entities/HurtowniaModel.Context.tt
+/MVVMFirma/Models/Entities/HurtowniaModel.cs
+/MVVMFirma/Models/Entities/HurtowniaModel.Designer.cs
+/MVVMFirma/Models/Entities/HurtowniaModel.edmx
+/MVVMFirma/Models/Entities/HurtowniaModel.edmx.diagram
+/MVVMFirma/Models/Entities/HurtowniaModel.tt
+/MVVMFirma/Models/Entities/Kategorie.cs
+/MVVMFirma/Models/Entities/Klienci.cs
+/MVVMFirma/Models/Entities/Magazyny.cs
+/MVVMFirma/Models/Entities/Platnosci.cs
+/MVVMFirma/Models/Entities/PozycjeFaktury.cs
+/MVVMFirma/Models/Entities/PozycjeZamowienia.cs
+/MVVMFirma/Models/Entities/Pracownicy.cs
+/MVVMFirma/Models/Entities/Produkty.cs
+/MVVMFirma/Models/Entities/StanyMagazynowe.cs
+/MVVMFirma/Models/Entities/sysdiagrams.cs
+/MVVMFirma/Models/Entities/Wydania.cs
+/MVVMFirma/Models/Entities/Zamowienia.cs
+/MVVMFirma/Models/Entities/Zwroty.cs
