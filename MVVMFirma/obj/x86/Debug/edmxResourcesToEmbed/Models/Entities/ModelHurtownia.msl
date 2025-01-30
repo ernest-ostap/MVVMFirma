@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HurtowniaModelStoreContainer" CdmEntityContainer="HurtowniaEntities1">
+    <EntitySetMapping Name="DostawcyProduktow">
+      <EntityTypeMapping TypeName="HurtowniaModel.DostawcyProduktow">
+        <MappingFragment StoreEntitySet="DostawcyProduktow">
+          <ScalarProperty Name="IdDostawcy" ColumnName="IdDostawcy" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+          <ScalarProperty Name="NIP" ColumnName="NIP" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dostawy">
+      <EntityTypeMapping TypeName="HurtowniaModel.Dostawy">
+        <MappingFragment StoreEntitySet="Dostawy">
+          <ScalarProperty Name="IdDostawy" ColumnName="IdDostawy" />
+          <ScalarProperty Name="DataDostawy" ColumnName="DataDostawy" />
+          <ScalarProperty Name="IdDostawcy" ColumnName="IdDostawcy" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Faktury">
+      <EntityTypeMapping TypeName="HurtowniaModel.Faktury">
+        <MappingFragment StoreEntitySet="Faktury">
+          <ScalarProperty Name="IdFaktury" ColumnName="IdFaktury" />
+          <ScalarProperty Name="Numer" ColumnName="Numer" />
+          <ScalarProperty Name="IdKlienta" ColumnName="IdKlienta" />
+          <ScalarProperty Name="DataWystawienia" ColumnName="DataWystawienia" />
+          <ScalarProperty Name="CzyZatwierdzona" ColumnName="CzyZatwierdzona" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kategorie">
+      <EntityTypeMapping TypeName="HurtowniaModel.Kategorie">
+        <MappingFragment StoreEntitySet="Kategorie">
+          <ScalarProperty Name="IdKategorii" ColumnName="IdKategorii" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Klienci">
+      <EntityTypeMapping TypeName="HurtowniaModel.Klienci">
+        <MappingFragment StoreEntitySet="Klienci">
+          <ScalarProperty Name="IdKlienta" ColumnName="IdKlienta" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+          <ScalarProperty Name="NIP" ColumnName="NIP" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Magazyny">
+      <EntityTypeMapping TypeName="HurtowniaModel.Magazyny">
+        <MappingFragment StoreEntitySet="Magazyny">
+          <ScalarProperty Name="IdMagazynu" ColumnName="IdMagazynu" />
+          <ScalarProperty Name="Lokalizacja" ColumnName="Lokalizacja" />
+          <ScalarProperty Name="Wielkosc" ColumnName="Wielkosc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Platnosci">
+      <EntityTypeMapping TypeName="HurtowniaModel.Platnosci">
+        <MappingFragment StoreEntitySet="Platnosci">
+          <ScalarProperty Name="IdPlatnosci" ColumnName="IdPlatnosci" />
+          <ScalarProperty Name="IdFaktury" ColumnName="IdFaktury" />
+          <ScalarProperty Name="DataPlatnosci" ColumnName="DataPlatnosci" />
+          <ScalarProperty Name="Kwota" ColumnName="Kwota" />
+          <ScalarProperty Name="MetodaPlatnosci" ColumnName="MetodaPlatnosci" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PozycjeFaktury">
+      <EntityTypeMapping TypeName="HurtowniaModel.PozycjeFaktury">
+        <MappingFragment StoreEntitySet="PozycjeFaktury">
+          <ScalarProperty Name="IdPozycjiFaktury" ColumnName="IdPozycjiFaktury" />
+          <ScalarProperty Name="IdFaktury" ColumnName="IdFaktury" />
+          <ScalarProperty Name="IdProduktu" ColumnName="IdProduktu" />
+          <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PozycjeZamowienia">
+      <EntityTypeMapping TypeName="HurtowniaModel.PozycjeZamowienia">
+        <MappingFragment StoreEntitySet="PozycjeZamowienia">
+          <ScalarProperty Name="IdPozycjiZamowienia" ColumnName="IdPozycjiZamowienia" />
+          <ScalarProperty Name="IdZamowienia" ColumnName="IdZamowienia" />
+          <ScalarProperty Name="IdProduktu" ColumnName="IdProduktu" />
+          <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pracownicy">
+      <EntityTypeMapping TypeName="HurtowniaModel.Pracownicy">
+        <MappingFragment StoreEntitySet="Pracownicy">
+          <ScalarProperty Name="IdPracownika" ColumnName="IdPracownika" />
+          <ScalarProperty Name="Imię" ColumnName="Imię" />
+          <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+          <ScalarProperty Name="Stanowisko" ColumnName="Stanowisko" />
+          <ScalarProperty Name="Placa" ColumnName="Placa" />
+          <ScalarProperty Name="RodzajUmowy" ColumnName="RodzajUmowy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Produkty">
+      <EntityTypeMapping TypeName="HurtowniaModel.Produkty">
+        <MappingFragment StoreEntitySet="Produkty">
+          <ScalarProperty Name="IdProduktu" ColumnName="IdProduktu" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+          <ScalarProperty Name="IdDostawcy" ColumnName="IdDostawcy" />
+          <ScalarProperty Name="IdKategorii" ColumnName="IdKategorii" />
+          <ScalarProperty Name="CenaZakupu" ColumnName="CenaZakupu" />
+          <ScalarProperty Name="CenaSprzedazy" ColumnName="CenaSprzedazy" />
+          <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StanyMagazynowe">
+      <EntityTypeMapping TypeName="HurtowniaModel.StanyMagazynowe">
+        <MappingFragment StoreEntitySet="StanyMagazynowe">
+          <ScalarProperty Name="IdStanuMagazynowego" ColumnName="IdStanuMagazynowego" />
+          <ScalarProperty Name="IdMagazynu" ColumnName="IdMagazynu" />
+          <ScalarProperty Name="IdProduktu" ColumnName="IdProduktu" />
+          <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="HurtowniaModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wydania">
+      <EntityTypeMapping TypeName="HurtowniaModel.Wydania">
+        <MappingFragment StoreEntitySet="Wydania">
+          <ScalarProperty Name="IdWydania" ColumnName="IdWydania" />
+          <ScalarProperty Name="DataWydania" ColumnName="DataWydania" />
+          <ScalarProperty Name="IdKlienta" ColumnName="IdKlienta" />
+          <ScalarProperty Name="Transport" ColumnName="Transport" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zamowienia">
+      <EntityTypeMapping TypeName="HurtowniaModel.Zamowienia">
+        <MappingFragment StoreEntitySet="Zamowienia">
+          <ScalarProperty Name="IdZamowienia" ColumnName="IdZamowienia" />
+          <ScalarProperty Name="DataZamowienia" ColumnName="DataZamowienia" />
+          <ScalarProperty Name="IdDostawcy" ColumnName="IdDostawcy" />
+          <ScalarProperty Name="StatusZamowienia" ColumnName="StatusZamowienia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zwroty">
+      <EntityTypeMapping TypeName="HurtowniaModel.Zwroty">
+        <MappingFragment StoreEntitySet="Zwroty">
+          <ScalarProperty Name="IdZwrotu" ColumnName="IdZwrotu" />
+          <ScalarProperty Name="IdProduktu" ColumnName="IdProduktu" />
+          <ScalarProperty Name="IdFaktury" ColumnName="IdFaktury" />
+          <ScalarProperty Name="DataZwrotu" ColumnName="DataZwrotu" />
+          <ScalarProperty Name="Ilość" ColumnName="Ilość" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

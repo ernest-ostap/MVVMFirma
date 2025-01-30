@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HurtowniaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DostawcyProduktow">
+    <Key>
+      <PropertyRef Name="IdDostawcy" />
+    </Key>
+    <Property Name="IdDostawcy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Adres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Dostawy" Relationship="Self.FK_Dostawy_DostawcyProduktow" FromRole="DostawcyProduktow" ToRole="Dostawy" />
+    <NavigationProperty Name="Produkty" Relationship="Self.FK_Produkty_DostawcyProduktow" FromRole="DostawcyProduktow" ToRole="Produkty" />
+    <NavigationProperty Name="Zamowienia" Relationship="Self.FK_Zamowienia_DostawcyProduktow" FromRole="DostawcyProduktow" ToRole="Zamowienia" />
+  </EntityType>
+  <EntityType Name="Dostawy">
+    <Key>
+      <PropertyRef Name="IdDostawy" />
+    </Key>
+    <Property Name="IdDostawy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DataDostawy" Type="DateTime" Precision="0" />
+    <Property Name="IdDostawcy" Type="Int32" />
+    <Property Name="Status" Type="Boolean" />
+    <NavigationProperty Name="DostawcyProduktow" Relationship="Self.FK_Dostawy_DostawcyProduktow" FromRole="Dostawy" ToRole="DostawcyProduktow" />
+  </EntityType>
+  <EntityType Name="Faktury">
+    <Key>
+      <PropertyRef Name="IdFaktury" />
+    </Key>
+    <Property Name="IdFaktury" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Numer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdKlienta" Type="Int32" />
+    <Property Name="DataWystawienia" Type="DateTime" Precision="0" />
+    <Property Name="CzyZatwierdzona" Type="Boolean" />
+    <NavigationProperty Name="Klienci" Relationship="Self.FK_Faktury_Klienci" FromRole="Faktury" ToRole="Klienci" />
+    <NavigationProperty Name="Platnosci" Relationship="Self.FK_Platnosci_Faktury" FromRole="Faktury" ToRole="Platnosci" />
+    <NavigationProperty Name="PozycjeFaktury" Relationship="Self.FK_PozycjeFaktury_Faktury" FromRole="Faktury" ToRole="PozycjeFaktury" />
+    <NavigationProperty Name="Zwroty" Relationship="Self.FK_Zwroty_Faktury" FromRole="Faktury" ToRole="Zwroty" />
+  </EntityType>
+  <EntityType Name="Kategorie">
+    <Key>
+      <PropertyRef Name="IdKategorii" />
+    </Key>
+    <Property Name="IdKategorii" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Produkty" Relationship="Self.FK_Produkty_Kategorie" FromRole="Kategorie" ToRole="Produkty" />
+  </EntityType>
+  <EntityType Name="Klienci">
+    <Key>
+      <PropertyRef Name="IdKlienta" />
+    </Key>
+    <Property Name="IdKlienta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Adres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Faktury" Relationship="Self.FK_Faktury_Klienci" FromRole="Klienci" ToRole="Faktury" />
+    <NavigationProperty Name="Wydania" Relationship="Self.FK_Wydania_Klienci" FromRole="Klienci" ToRole="Wydania" />
+  </EntityType>
+  <EntityType Name="Magazyny">
+    <Key>
+      <PropertyRef Name="IdMagazynu" />
+    </Key>
+    <Property Name="IdMagazynu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Lokalizacja" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Wielkosc" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="StanyMagazynowe" Relationship="Self.FK_StanyMagazynowe_Magazyny" FromRole="Magazyny" ToRole="StanyMagazynowe" />
+  </EntityType>
+  <EntityType Name="Platnosci">
+    <Key>
+      <PropertyRef Name="IdPlatnosci" />
+    </Key>
+    <Property Name="IdPlatnosci" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdFaktury" Type="Int32" />
+    <Property Name="DataPlatnosci" Type="DateTime" Precision="0" />
+    <Property Name="Kwota" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="MetodaPlatnosci" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Faktury" Relationship="Self.FK_Platnosci_Faktury" FromRole="Platnosci" ToRole="Faktury" />
+  </EntityType>
+  <EntityType Name="PozycjeFaktury">
+    <Key>
+      <PropertyRef Name="IdPozycjiFaktury" />
+    </Key>
+    <Property Name="IdPozycjiFaktury" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdFaktury" Type="Int32" />
+    <Property Name="IdProduktu" Type="Int32" />
+    <Property Name="Ilosc" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Faktury" Relationship="Self.FK_PozycjeFaktury_Faktury" FromRole="PozycjeFaktury" ToRole="Faktury" />
+    <NavigationProperty Name="Produkty" Relationship="Self.FK_PozycjeFaktury_Produkty" FromRole="PozycjeFaktury" ToRole="Produkty" />
+  </EntityType>
+  <EntityType Name="PozycjeZamowienia">
+    <Key>
+      <PropertyRef Name="IdPozycjiZamowienia" />
+    </Key>
+    <Property Name="IdPozycjiZamowienia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdZamowienia" Type="Int32" />
+    <Property Name="IdProduktu" Type="Int32" />
+    <Property Name="Ilosc" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Produkty" Relationship="Self.FK_PozycjeZamowienia_Produkty" FromRole="PozycjeZamowienia" ToRole="Produkty" />
+    <NavigationProperty Name="Zamowienia" Relationship="Self.FK_PozycjeZamowienia_Zamowienia" FromRole="PozycjeZamowienia" ToRole="Zamowienia" />
+  </EntityType>
+  <EntityType Name="Pracownicy">
+    <Key>
+      <PropertyRef Name="IdPracownika" />
+    </Key>
+    <Property Name="IdPracownika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Imię" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Stanowisko" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Placa" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="RodzajUmowy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Produkty">
+    <Key>
+      <PropertyRef Name="IdProduktu" />
+    </Key>
+    <Property Name="IdProduktu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdDostawcy" Type="Int32" />
+    <Property Name="IdKategorii" Type="Int32" />
+    <Property Name="CenaZakupu" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CenaSprzedazy" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Ilosc" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="DostawcyProduktow" Relationship="Self.FK_Produkty_DostawcyProduktow" FromRole="Produkty" ToRole="DostawcyProduktow" />
+    <NavigationProperty Name="Kategorie" Relationship="Self.FK_Produkty_Kategorie" FromRole="Produkty" ToRole="Kategorie" />
+    <NavigationProperty Name="PozycjeFaktury" Relationship="Self.FK_PozycjeFaktury_Produkty" FromRole="Produkty" ToRole="PozycjeFaktury" />
+    <NavigationProperty Name="PozycjeZamowienia" Relationship="Self.FK_PozycjeZamowienia_Produkty" FromRole="Produkty" ToRole="PozycjeZamowienia" />
+    <NavigationProperty Name="StanyMagazynowe" Relationship="Self.FK_StanyMagazynowe_Produkty" FromRole="Produkty" ToRole="StanyMagazynowe" />
+    <NavigationProperty Name="Zwroty" Relationship="Self.FK_Zwroty_Produkty" FromRole="Produkty" ToRole="Zwroty" />
+  </EntityType>
+  <EntityType Name="StanyMagazynowe">
+    <Key>
+      <PropertyRef Name="IdStanuMagazynowego" />
+    </Key>
+    <Property Name="IdStanuMagazynowego" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdMagazynu" Type="Int32" />
+    <Property Name="IdProduktu" Type="Int32" />
+    <Property Name="Ilosc" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Magazyny" Relationship="Self.FK_StanyMagazynowe_Magazyny" FromRole="StanyMagazynowe" ToRole="Magazyny" />
+    <NavigationProperty Name="Produkty" Relationship="Self.FK_StanyMagazynowe_Produkty" FromRole="StanyMagazynowe" ToRole="Produkty" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Wydania">
+    <Key>
+      <PropertyRef Name="IdWydania" />
+    </Key>
+    <Property Name="IdWydania" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DataWydania" Type="DateTime" Precision="0" />
+    <Property Name="IdKlienta" Type="Int32" />
+    <Property Name="Transport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Klienci" Relationship="Self.FK_Wydania_Klienci" FromRole="Wydania" ToRole="Klienci" />
+  </EntityType>
+  <EntityType Name="Zamowienia">
+    <Key>
+      <PropertyRef Name="IdZamowienia" />
+    </Key>
+    <Property Name="IdZamowienia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DataZamowienia" Type="DateTime" Precision="0" />
+    <Property Name="IdDostawcy" Type="Int32" />
+    <Property Name="StatusZamowienia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="DostawcyProduktow" Relationship="Self.FK_Zamowienia_DostawcyProduktow" FromRole="Zamowienia" ToRole="DostawcyProduktow" />
+    <NavigationProperty Name="PozycjeZamowienia" Relationship="Self.FK_PozycjeZamowienia_Zamowienia" FromRole="Zamowienia" ToRole="PozycjeZamowienia" />
+  </EntityType>
+  <EntityType Name="Zwroty">
+    <Key>
+      <PropertyRef Name="IdZwrotu" />
+    </Key>
+    <Property Name="IdZwrotu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdProduktu" Type="Int32" />
+    <Property Name="IdFaktury" Type="Int32" />
+    <Property Name="DataZwrotu" Type="DateTime" Precision="0" />
+    <Property Name="Ilość" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Faktury" Relationship="Self.FK_Zwroty_Faktury" FromRole="Zwroty" ToRole="Faktury" />
+    <NavigationProperty Name="Produkty" Relationship="Self.FK_Zwroty_Produkty" FromRole="Zwroty" ToRole="Produkty" />
+  </EntityType>
+  <Association Name="FK_Dostawy_DostawcyProduktow">
+    <End Role="DostawcyProduktow" Type="Self.DostawcyProduktow" Multiplicity="0..1" />
+    <End Role="Dostawy" Type="Self.Dostawy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DostawcyProduktow">
+        <PropertyRef Name="IdDostawcy" />
+      </Principal>
+      <Dependent Role="Dostawy">
+        <PropertyRef Name="IdDostawcy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Produkty_DostawcyProduktow">
+    <End Role="DostawcyProduktow" Type="Self.DostawcyProduktow" Multiplicity="0..1" />
+    <End Role="Produkty" Type="Self.Produkty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DostawcyProduktow">
+        <PropertyRef Name="IdDostawcy" />
+      </Principal>
+      <Dependent Role="Produkty">
+        <PropertyRef Name="IdDostawcy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Zamowienia_DostawcyProduktow">
+    <End Role="DostawcyProduktow" Type="Self.DostawcyProduktow" Multiplicity="0..1" />
+    <End Role="Zamowienia" Type="Self.Zamowienia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DostawcyProduktow">
+        <PropertyRef Name="IdDostawcy" />
+      </Principal>
+      <Dependent Role="Zamowienia">
+        <PropertyRef Name="IdDostawcy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Faktury_Klienci">
+    <End Role="Klienci" Type="Self.Klienci" Multiplicity="0..1" />
+    <End Role="Faktury" Type="Self.Faktury" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klienci">
+        <PropertyRef Name="IdKlienta" />
+      </Principal>
+      <Dependent Role="Faktury">
+        <PropertyRef Name="IdKlienta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Platnosci_Faktury">
+    <End Role="Faktury" Type="Self.Faktury" Multiplicity="0..1" />
+    <End Role="Platnosci" Type="Self.Platnosci" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faktury">
+        <PropertyRef Name="IdFaktury" />
+      </Principal>
+      <Dependent Role="Platnosci">
+        <PropertyRef Name="IdFaktury" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PozycjeFaktury_Faktury">
+    <End Role="Faktury" Type="Self.Faktury" Multiplicity="0..1" />
+    <End Role="PozycjeFaktury" Type="Self.PozycjeFaktury" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faktury">
+        <PropertyRef Name="IdFaktury" />
+      </Principal>
+      <Dependent Role="PozycjeFaktury">
+        <PropertyRef Name="IdFaktury" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Zwroty_Faktury">
+    <End Role="Faktury" Type="Self.Faktury" Multiplicity="0..1" />
+    <End Role="Zwroty" Type="Self.Zwroty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faktury">
+        <PropertyRef Name="IdFaktury" />
+      </Principal>
+      <Dependent Role="Zwroty">
+        <PropertyRef Name="IdFaktury" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Produkty_Kategorie">
+    <End Role="Kategorie" Type="Self.Kategorie" Multiplicity="0..1" />
+    <End Role="Produkty" Type="Self.Produkty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategorie">
+        <PropertyRef Name="IdKategorii" />
+      </Principal>
+      <Dependent Role="Produkty">
+        <PropertyRef Name="IdKategorii" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Wydania_Klienci">
+    <End Role="Klienci" Type="Self.Klienci" Multiplicity="0..1" />
+    <End Role="Wydania" Type="Self.Wydania" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Klienci">
+        <PropertyRef Name="IdKlienta" />
+      </Principal>
+      <Dependent Role="Wydania">
+        <PropertyRef Name="IdKlienta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StanyMagazynowe_Magazyny">
+    <End Role="Magazyny" Type="Self.Magazyny" Multiplicity="0..1" />
+    <End Role="StanyMagazynowe" Type="Self.StanyMagazynowe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Magazyny">
+        <PropertyRef Name="IdMagazynu" />
+      </Principal>
+      <Dependent Role="StanyMagazynowe">
+        <PropertyRef Name="IdMagazynu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PozycjeFaktury_Produkty">
+    <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+    <End Role="PozycjeFaktury" Type="Self.PozycjeFaktury" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produkty">
+        <PropertyRef Name="IdProduktu" />
+      </Principal>
+      <Dependent Role="PozycjeFaktury">
+        <PropertyRef Name="IdProduktu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PozycjeZamowienia_Produkty">
+    <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+    <End Role="PozycjeZamowienia" Type="Self.PozycjeZamowienia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produkty">
+        <PropertyRef Name="IdProduktu" />
+      </Principal>
+      <Dependent Role="PozycjeZamowienia">
+        <PropertyRef Name="IdProduktu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PozycjeZamowienia_Zamowienia">
+    <End Role="Zamowienia" Type="Self.Zamowienia" Multiplicity="0..1" />
+    <End Role="PozycjeZamowienia" Type="Self.PozycjeZamowienia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Zamowienia">
+        <PropertyRef Name="IdZamowienia" />
+      </Principal>
+      <Dependent Role="PozycjeZamowienia">
+        <PropertyRef Name="IdZamowienia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StanyMagazynowe_Produkty">
+    <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+    <End Role="StanyMagazynowe" Type="Self.StanyMagazynowe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produkty">
+        <PropertyRef Name="IdProduktu" />
+      </Principal>
+      <Dependent Role="StanyMagazynowe">
+        <PropertyRef Name="IdProduktu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Zwroty_Produkty">
+    <End Role="Produkty" Type="Self.Produkty" Multiplicity="0..1" />
+    <End Role="Zwroty" Type="Self.Zwroty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produkty">
+        <PropertyRef Name="IdProduktu" />
+      </Principal>
+      <Dependent Role="Zwroty">
+        <PropertyRef Name="IdProduktu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HurtowniaEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DostawcyProduktow" EntityType="Self.DostawcyProduktow" />
+    <EntitySet Name="Dostawy" EntityType="Self.Dostawy" />
+    <EntitySet Name="Faktury" EntityType="Self.Faktury" />
+    <EntitySet Name="Kategorie" EntityType="Self.Kategorie" />
+    <EntitySet Name="Klienci" EntityType="Self.Klienci" />
+    <EntitySet Name="Magazyny" EntityType="Self.Magazyny" />
+    <EntitySet Name="Platnosci" EntityType="Self.Platnosci" />
+    <EntitySet Name="PozycjeFaktury" EntityType="Self.PozycjeFaktury" />
+    <EntitySet Name="PozycjeZamowienia" EntityType="Self.PozycjeZamowienia" />
+    <EntitySet Name="Pracownicy" EntityType="Self.Pracownicy" />
+    <EntitySet Name="Produkty" EntityType="Self.Produkty" />
+    <EntitySet Name="StanyMagazynowe" EntityType="Self.StanyMagazynowe" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Wydania" EntityType="Self.Wydania" />
+    <EntitySet Name="Zamowienia" EntityType="Self.Zamowienia" />
+    <EntitySet Name="Zwroty" EntityType="Self.Zwroty" />
+    <AssociationSet Name="FK_Dostawy_DostawcyProduktow" Association="Self.FK_Dostawy_DostawcyProduktow">
+      <End Role="DostawcyProduktow" EntitySet="DostawcyProduktow" />
+      <End Role="Dostawy" EntitySet="Dostawy" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Produkty_DostawcyProduktow" Association="Self.FK_Produkty_DostawcyProduktow">
+      <End Role="DostawcyProduktow" EntitySet="DostawcyProduktow" />
+      <End Role="Produkty" EntitySet="Produkty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Zamowienia_DostawcyProduktow" Association="Self.FK_Zamowienia_DostawcyProduktow">
+      <End Role="DostawcyProduktow" EntitySet="DostawcyProduktow" />
+      <End Role="Zamowienia" EntitySet="Zamowienia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Faktury_Klienci" Association="Self.FK_Faktury_Klienci">
+      <End Role="Klienci" EntitySet="Klienci" />
+      <End Role="Faktury" EntitySet="Faktury" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Platnosci_Faktury" Association="Self.FK_Platnosci_Faktury">
+      <End Role="Faktury" EntitySet="Faktury" />
+      <End Role="Platnosci" EntitySet="Platnosci" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PozycjeFaktury_Faktury" Association="Self.FK_PozycjeFaktury_Faktury">
+      <End Role="Faktury" EntitySet="Faktury" />
+      <End Role="PozycjeFaktury" EntitySet="PozycjeFaktury" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Zwroty_Faktury" Association="Self.FK_Zwroty_Faktury">
+      <End Role="Faktury" EntitySet="Faktury" />
+      <End Role="Zwroty" EntitySet="Zwroty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Produkty_Kategorie" Association="Self.FK_Produkty_Kategorie">
+      <End Role="Kategorie" EntitySet="Kategorie" />
+      <End Role="Produkty" EntitySet="Produkty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Wydania_Klienci" Association="Self.FK_Wydania_Klienci">
+      <End Role="Klienci" EntitySet="Klienci" />
+      <End Role="Wydania" EntitySet="Wydania" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StanyMagazynowe_Magazyny" Association="Self.FK_StanyMagazynowe_Magazyny">
+      <End Role="Magazyny" EntitySet="Magazyny" />
+      <End Role="StanyMagazynowe" EntitySet="StanyMagazynowe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PozycjeFaktury_Produkty" Association="Self.FK_PozycjeFaktury_Produkty">
+      <End Role="Produkty" EntitySet="Produkty" />
+      <End Role="PozycjeFaktury" EntitySet="PozycjeFaktury" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PozycjeZamowienia_Produkty" Association="Self.FK_PozycjeZamowienia_Produkty">
+      <End Role="Produkty" EntitySet="Produkty" />
+      <End Role="PozycjeZamowienia" EntitySet="PozycjeZamowienia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PozycjeZamowienia_Zamowienia" Association="Self.FK_PozycjeZamowienia_Zamowienia">
+      <End Role="Zamowienia" EntitySet="Zamowienia" />
+      <End Role="PozycjeZamowienia" EntitySet="PozycjeZamowienia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StanyMagazynowe_Produkty" Association="Self.FK_StanyMagazynowe_Produkty">
+      <End Role="Produkty" EntitySet="Produkty" />
+      <End Role="StanyMagazynowe" EntitySet="StanyMagazynowe" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Zwroty_Produkty" Association="Self.FK_Zwroty_Produkty">
+      <End Role="Produkty" EntitySet="Produkty" />
+      <End Role="Zwroty" EntitySet="Zwroty" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
